@@ -1,0 +1,51 @@
+
+# Ejecución de 01_extraccion_api.py - 2026-11-20 11:09:20
+2026-11-20 11:09:21 | BCRP | HTTP 200 | registros: 168 | https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PN43443BM/json/2012-1/2025-12/esp | Exportaciones por grupo de actividad económica - valores FOB (millones US$) - Agropecuario - Productos primarios - Arándanos
+2026-11-20 11:09:23 | BCRP | HTTP 200 | registros: 168 | https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PN43444BM/json/2012-1/2025-12/esp | Exportaciones por grupo de actividad económica - valores FOB (millones US$) - Agropecuario - Productos primarios - Uvas
+2026-11-20 11:09:25 | BCRP | HTTP 200 | registros: 168 | https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PN43445BM/json/2012-1/2025-12/esp | Exportaciones por grupo de actividad económica - valores FOB (millones US$) - Agropecuario - Productos primarios - Café
+2026-11-20 11:09:27 | BCRP | HTTP 200 | registros: 168 | https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PN43446BM/json/2012-1/2025-12/esp | Exportaciones por grupo de actividad económica - valores FOB (millones US$) - Agropecuario - Productos primarios - Paltas
+2026-11-20 11:09:30 | BCRP | HTTP 200 | registros: 168 | https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PN43447BM/json/2012-1/2025-12/esp | Exportaciones por grupo de actividad económica - valores FOB (millones US$) - Agropecuario - Productos primarios - Cacao
+2026-11-20 11:09:32 | BCRP | HTTP 200 | registros: 168 | https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PN43448BM/json/2012-1/2025-12/esp | Exportaciones por grupo de actividad económica - valores FOB (millones US$) - Agropecuario - Productos primarios - Espárragos
+2026-11-20 11:09:34 | BCRP | HTTP 200 | registros: 168 | https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PN43449BM/json/2012-1/2025-12/esp | Exportaciones por grupo de actividad económica - valores FOB (millones US$) - Agropecuario - Productos primarios - Mangos
+2026-11-20 11:09:36 | BCRP | HTTP 200 | registros: 168 | https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PN43450BM/json/2012-1/2025-12/esp | Exportaciones por grupo de actividad económica - valores FOB (millones US$) - Agropecuario - Productos primarios - Mandarinas
+2026-11-20 11:09:38 | BCRP | HTTP 200 | registros: 168 | https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PN43453BM/json/2012-1/2025-12/esp | Exportaciones por grupo de actividad económica - valores FOB (millones US$) - Agropecuario - Manufacturas de origen agrícola - Conservas de frutas y hortalizas
+2026-11-20 11:09:40 | BCRP | HTTP 200 | registros: 168 | https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PN43455BM/json/2012-1/2025-12/esp | Exportaciones por grupo de actividad económica - valores FOB (millones US$) - Agropecuario - Manufacturas de origen agrícola - Frutas congeladas
+2026-11-20 11:09:42 | BCRP | HTTP 200 | registros: 168 | https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PN01207PM/json/2012-1/2025-12/esp | Tipo de cambio - promedio del periodo (S/ por US$) - Interbancario - Promedio
+2026-11-20 11:09:43 | RESUMEN | Observaciones producto-mes descargadas del BCRP: 1680
+2026-11-20 11:09:44 | Banco Mundial API | HTTP 200 | registros: 36 | https://api.worldbank.org/v2/sources/15/indicators?format=json&per_page=2000 | fuente 15 (Global Economic Monitor)
+2026-11-20 11:09:46 | Banco Mundial robots.txt | HTTP - | registros: - | https://www.worldbank.org/robots.txt | lectura permitida: False
+2026-11-20 11:09:47 | Banco Mundial Pink Sheet | HTTP 200 | registros: 574 KB | https://thedocs.worldbank.org/en/doc/74e8be41ceb20fa0da750cda2f6b9e4e-0050012026/related/CMO-Historical-Data-Monthly.xlsx | archivo mensual guardado
+
+# Ejecución de 01_extraccion_api.py - 2026-11-20 11:12:31
+2026-11-20 11:12:32 | BCRP | HTTP 200 | registros: 168 | https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PN43443BM/json/2012-1/2025-12/esp | Exportaciones por grupo de actividad económica - valores FOB (millones US$) - Agropecuario - Productos primarios - Arándanos
+2026-11-20 11:12:34 | BCRP | HTTP 200 | registros: 168 | https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PN43444BM/json/2012-1/2025-12/esp | Exportaciones por grupo de actividad económica - valores FOB (millones US$) - Agropecuario - Productos primarios - Uvas
+2026-11-20 11:12:36 | BCRP | HTTP 200 | registros: 168 | https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PN43445BM/json/2012-1/2025-12/esp | Exportaciones por grupo de actividad económica - valores FOB (millones US$) - Agropecuario - Productos primarios - Café
+2026-11-20 11:12:38 | BCRP | HTTP 200 | registros: 168 | https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PN43446BM/json/2012-1/2025-12/esp | Exportaciones por grupo de actividad económica - valores FOB (millones US$) - Agropecuario - Productos primarios - Paltas
+2026-11-20 11:12:40 | BCRP | HTTP 200 | registros: 168 | https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PN43447BM/json/2012-1/2025-12/esp | Exportaciones por grupo de actividad económica - valores FOB (millones US$) - Agropecuario - Productos primarios - Cacao
+2026-11-20 11:12:42 | BCRP | HTTP 200 | registros: 168 | https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PN43448BM/json/2012-1/2025-12/esp | Exportaciones por grupo de actividad económica - valores FOB (millones US$) - Agropecuario - Productos primarios - Espárragos
+2026-11-20 11:12:44 | BCRP | HTTP 200 | registros: 168 | https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PN43449BM/json/2012-1/2025-12/esp | Exportaciones por grupo de actividad económica - valores FOB (millones US$) - Agropecuario - Productos primarios - Mangos
+2026-11-20 11:12:46 | BCRP | HTTP 200 | registros: 168 | https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PN43450BM/json/2012-1/2025-12/esp | Exportaciones por grupo de actividad económica - valores FOB (millones US$) - Agropecuario - Productos primarios - Mandarinas
+2026-11-20 11:12:48 | BCRP | HTTP 200 | registros: 168 | https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PN43453BM/json/2012-1/2025-12/esp | Exportaciones por grupo de actividad económica - valores FOB (millones US$) - Agropecuario - Manufacturas de origen agrícola - Conservas de frutas y hortalizas
+2026-11-20 11:12:50 | BCRP | HTTP 200 | registros: 168 | https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PN43455BM/json/2012-1/2025-12/esp | Exportaciones por grupo de actividad económica - valores FOB (millones US$) - Agropecuario - Manufacturas de origen agrícola - Frutas congeladas
+2026-11-20 11:12:52 | BCRP | HTTP 200 | registros: 168 | https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PN01207PM/json/2012-1/2025-12/esp | Tipo de cambio - promedio del periodo (S/ por US$) - Interbancario - Promedio
+2026-11-20 11:12:54 | RESUMEN | Observaciones producto-mes descargadas del BCRP: 1680
+2026-11-20 11:12:54 | Banco Mundial API | HTTP 200 | registros: 36 | https://api.worldbank.org/v2/sources/15/indicators?format=json&per_page=2000 | fuente 15 (Global Economic Monitor)
+2026-11-20 11:12:56 | Banco Mundial robots.txt | HTTP - | registros: - | https://www.worldbank.org/robots.txt | lectura permitida: False
+2026-11-20 11:12:57 | Banco Mundial Pink Sheet | HTTP 200 | registros: 574 KB | https://thedocs.worldbank.org/en/doc/74e8be41ceb20fa0da750cda2f6b9e4e-0050012026/related/CMO-Historical-Data-Monthly.xlsx | archivo mensual guardado
+
+# Ejecución de 02_scraping_web.py - 2026-11-20 11:18:12
+2026-11-20 11:18:12 | SUNAT robots.txt | HTTP - | registros: - | https://www.sunat.gob.pe/robots.txt | lectura permitida: True
+2026-11-20 11:18:12 | SUNAT página | HTTP 200 | registros: 2 | https://www.sunat.gob.pe/estadisticasestudios/exportaciones.html | enlaces de cuadros encontrados
+2026-11-20 11:18:14 | SUNAT G7 | HTTP 200 | registros: 1866 KB | https://www.sunat.gob.pe/estadisticasestudios/nota_tributaria/cdro_G7.xlsx | valor FOB mensual por subpartida; años 2005-2026; publicado: Wed, 04 Nov 2026 16:50:57 GMT
+2026-11-20 11:18:16 | SUNAT G9 | HTTP 200 | registros: 6762 KB | https://www.sunat.gob.pe/estadisticasestudios/nota_tributaria/cdro_G9.xlsx | valor FOB y peso neto anual por subpartida; años 2005-2025; publicado: Mon, 28 Sep 2026 19:51:07 GMT
+
+# Ejecución de 03_limpieza_datos.py - 2026-11-20 11:28:39
+2026-11-20 11:28:39 | LIMPIEZA | BCRP leído: 1680 filas producto-mes; 0 valores n.d.
+2026-11-20 11:28:41 | LIMPIEZA | SUNAT G7 unido: 12 meses sin dato (producto fuera de las principales 500 subpartidas)
+2026-11-20 11:28:48 | LIMPIEZA | Diferencia media |SUNAT G9 vs BCRP| por producto (%): arandanos=0.1, cacao=0.0, cafe=0.3, conservas_frutas_hortalizas=14.5, esparragos=0.1, frutas_congeladas=0.2, mandarinas=1.0, mangos=0.6, paltas=0.2, uvas=0.4
+2026-11-20 11:28:48 | LIMPIEZA | Banco Mundial unido: precio internacional para café, cacao y mandarinas (naranja) e índice agrícola para todos los productos
+2026-11-20 11:28:48 | LIMPIEZA | Controles: sin duplicados; 1680 filas; valores negativos: 0
+2026-11-20 11:28:48 | LIMPIEZA | Correlación FOB mensual BCRP vs SUNAT G7: 0.9996
+2026-11-20 11:28:49 | LIMPIEZA | Archivo guardado: datos_procesados_2024200535B.csv (1680 filas x 14 columnas)
+2026-11-20 11:28:49 | LIMPIEZA | SHA-256: 52d396c1362aaf3d465180f3621b9a52aff34490ab5d117fe00cc0188cb124ff
+2026-11-20 11:28:49 | LIMPIEZA | Diccionario de variables actualizado
