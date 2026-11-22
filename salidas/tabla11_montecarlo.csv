@@ -1,0 +1,10 @@
+Indicador,Valor
+Número de simulaciones,"10,000"
+Volatilidad anual del precio FOB,19.0 %
+Volatilidad anual del tipo de cambio,5.0 %
+Correlación precio - tipo de cambio,-0.27
+VAN promedio,"S/ 2,670,785"
+VAN mediano,"S/ 1,639,063"
+Percentil 5 del VAN,"S/ -5,287,263"
+Percentil 95 del VAN,"S/ 14,173,743"
+Probabilidad de VAN negativo,37.25 %

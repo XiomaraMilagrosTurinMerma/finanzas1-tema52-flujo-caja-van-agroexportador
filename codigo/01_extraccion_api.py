@@ -37,7 +37,9 @@ LOG = BASE / "log_ejecucion.txt"
 INCIDENCIAS = BASE / "incidencias_fuente.md"
 CRUDOS.mkdir(exist_ok=True)
 
-INICIO, FIN = "2012-1", "2025-12"                      # periodo de estudio
+# Periodo de estudio (parámetros congelados; formato que pide la API del BCRP: AAAA-M)
+FECHA_INICIO = "2012-1"
+FECHA_CORTE = "2025-12"
 PAUSA = 1.5                                            # segundos entre consultas
 CABECERAS = {"User-Agent": "Mozilla/5.0 (proyecto academico UNCP - Finanzas I; "
                            "contacto: 2024200535B)"}
@@ -96,7 +98,7 @@ with open(LOG, "a", encoding="utf-8") as f:
 obs_productos = 0
 for codigo, nombre in SERIES_BCRP.items():
     url = (f"https://estadisticas.bcrp.gob.pe/estadisticas/series/api/"
-           f"{codigo}/json/{INICIO}/{FIN}/esp")
+           f"{codigo}/json/{FECHA_INICIO}/{FECHA_CORTE}/esp")
     try:
         r = requests.get(url, headers=CABECERAS, timeout=60)
         datos = r.json()

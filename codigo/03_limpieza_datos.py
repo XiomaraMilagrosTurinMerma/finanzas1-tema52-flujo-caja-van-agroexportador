@@ -42,7 +42,13 @@ DICCIONARIO = BASE / "diccionario_variables.md"
 PROCESADOS.mkdir(exist_ok=True)
 SALIDA = PROCESADOS / "datos_procesados_2024200535B.csv"
 
-ANIOS = range(2012, 2026)
+# Periodo de estudio (parámetros congelados, iguales a los de 01 y 02)
+FECHA_INICIO = "2012-01"
+FECHA_CORTE = "2025-12"
+ANIOS = range(int(FECHA_INICIO[:4]), int(FECHA_CORTE[:4]) + 1)
+N_MESES = len(pd.period_range(FECHA_INICIO, FECHA_CORTE, freq="M"))
+CRUDO_CSV = CRUDOS / "datos_crudos_2024200535B.csv"
+crudos = []   # aquí se juntan los valores tal como vienen de cada fuente
 MESES_ES = {"Ene": 1, "Feb": 2, "Mar": 3, "Abr": 4, "May": 5, "Jun": 6,
             "Jul": 7, "Ago": 8, "Sep": 9, "Set": 9, "Oct": 10, "Nov": 11, "Dic": 12}
 
@@ -105,6 +111,9 @@ def leer_bcrp(archivo):
         mes_txt, anio = p["name"].split(".")
         valor = pd.to_numeric(p["values"][0], errors="coerce")   # "n.d." -> NaN
         filas.append({"anio": int(anio), "mes": MESES_ES[mes_txt], "valor": valor})
+        crudos.append({"fuente": "BCRP (API)", "archivo": archivo.name, "hoja": "-",
+                       "serie": datos["config"]["series"][0]["name"], "codigo": archivo.name.split("_")[1],
+                       "periodo": p["name"], "variable": "valor", "valor_original": p["values"][0]})
     return pd.DataFrame(filas)
 
 
@@ -132,6 +141,11 @@ for anio in ANIOS:
     g7["codigo"] = g7[3].astype("int64").astype(str).str.zfill(10)
     for producto, info in PRODUCTOS.items():
         sub = g7[g7["codigo"].apply(lambda c: pertenece(c, info))]
+        for _, fila in sub.iterrows():
+            for mes in range(1, 13):
+                crudos.append({"fuente": "SUNAT (cuadro G7)", "archivo": "sunat_cdro_G7.xlsx", "hoja": str(anio),
+                               "serie": str(fila[4]), "codigo": fila["codigo"], "periodo": f"{anio}-{mes:02d}",
+                               "variable": "valor FOB", "valor_original": fila[4 + mes]})
         for mes in range(1, 13):
             valor = pd.to_numeric(sub[4 + mes], errors="coerce").sum() / 1e6 if len(sub) else np.nan
             filas_g7.append({"producto": producto, "anio": anio, "mes": mes,
@@ -157,6 +171,11 @@ for anio in ANIOS:
     g9["codigo"] = g9[3].astype("int64").astype(str).str.zfill(10)
     for producto, info in PRODUCTOS.items():
         sub = g9[g9["codigo"].apply(lambda c: pertenece(c, info))]
+        for _, fila in sub.iterrows():
+            for col, variable in [(7, "valor FOB"), (8, "peso neto")]:
+                crudos.append({"fuente": "SUNAT (cuadro G9)", "archivo": "sunat_cdro_G9.xlsx", "hoja": str(anio),
+                               "serie": str(fila[4]), "codigo": fila["codigo"], "periodo": str(anio),
+                               "variable": variable, "valor_original": fila[col]})
         fob = pd.to_numeric(sub[7], errors="coerce").sum()
         kg = pd.to_numeric(sub[8], errors="coerce").sum()
         filas_g9.append({"producto": producto, "anio": anio,
@@ -203,6 +222,11 @@ for producto, columna in PRECIO_BM.items():
     j = encab.index(columna)
     tmp = precios[["anio", "mes"]].copy()
     tmp["precio_int_usd_kg"] = pd.to_numeric(precios[j], errors="coerce")
+    for fecha, valor in zip(precios["fecha"], precios[j]):
+        if int(fecha[:4]) in ANIOS:
+            crudos.append({"fuente": "Banco Mundial (Pink Sheet)", "archivo": pink.name, "hoja": "Monthly Prices",
+                           "serie": columna, "codigo": "-", "periodo": fecha, "variable": "precio",
+                           "valor_original": valor})
     tmp["producto"] = producto
     filas_bm.append(tmp)
 bm = pd.concat(filas_bm)
@@ -216,6 +240,11 @@ agro = pd.DataFrame({"anio": indices[0].astype(str).str[:4].astype(int),
                      "mes": indices[0].astype(str).str[5:].astype(int),
                      "indice_agricola_bm": pd.to_numeric(indices[col_agro], errors="coerce")})
 panel = panel.merge(agro, on=["anio", "mes"], how="left")
+for fecha, valor in zip(indices[0].astype(str), indices[col_agro]):
+    if int(fecha[:4]) in ANIOS:
+        crudos.append({"fuente": "Banco Mundial (Pink Sheet)", "archivo": pink.name, "hoja": "Monthly Indices",
+                       "serie": "Agriculture", "codigo": "-", "periodo": fecha, "variable": "índice",
+                       "valor_original": valor})
 log("Banco Mundial unido: precio internacional para café, cacao y mandarinas (naranja) "
     "e índice agrícola para todos los productos")
 
@@ -235,7 +264,7 @@ panel = panel[columnas].sort_values(["producto", "fecha"]).reset_index(drop=True
 
 # Controles de calidad
 assert not panel.duplicated(["producto", "fecha"]).any(), "Hay filas duplicadas producto-mes"
-assert len(panel) == len(PRODUCTOS) * 168, "El panel no tiene 10 x 168 filas"
+assert len(panel) == len(PRODUCTOS) * N_MESES, f"El panel no tiene {len(PRODUCTOS)} x {N_MESES} filas"
 negativos = (panel[["fob_bcrp_musd", "volumen_estimado_t"]] < 0).sum().sum()
 log(f"Controles: sin duplicados; {len(panel)} filas; valores negativos: {negativos}")
 corr = panel[["fob_bcrp_musd", "fob_sunat_musd"]].corr().iloc[0, 1]
@@ -244,7 +273,14 @@ log(f"Correlación FOB mensual BCRP vs SUNAT G7: {corr:.4f}")
 # ------------------------------------------------------------------
 # 6. Guardar, calcular hash y escribir el diccionario de variables
 # ------------------------------------------------------------------
-panel.to_csv(SALIDA, index=False, encoding="utf-8")
+# Archivo de datos crudos: todos los valores usados, tal como vienen de cada fuente (sin editar)
+crudo = pd.DataFrame(crudos)
+crudo["valor_original"] = crudo["valor_original"].astype(str)
+crudo.to_csv(CRUDO_CSV, index=False, encoding="utf-8", lineterminator="\n")
+log(f"Archivo guardado: datos_crudos/{CRUDO_CSV.name} ({len(crudo)} valores originales de "
+    f"{crudo['fuente'].nunique()} fuentes)")
+
+panel.to_csv(SALIDA, index=False, encoding="utf-8", lineterminator="\n")  # "\n": mismo hash en Windows y en GitHub
 sha = hashlib.sha256(SALIDA.read_bytes()).hexdigest()
 log(f"Archivo guardado: {SALIDA.name} ({len(panel)} filas x {panel.shape[1]} columnas)")
 log(f"SHA-256: {sha}")
@@ -252,7 +288,7 @@ log(f"SHA-256: {sha}")
 DICCIONARIO.write_text(f"""# Diccionario de variables
 
 Archivo: `datos_procesados/datos_procesados_2024200535B.csv`
-Unidad de observación: producto + mes · Periodo: 2012-01 a 2025-12 · Filas: {len(panel)}
+Unidad de observación: producto + mes · Periodo: {FECHA_INICIO} a {FECHA_CORTE} · Filas: {len(panel)}
 
 | Variable | Definición | Unidad | Frecuencia | Fuente | URL o endpoint |
 |---|---|---|---|---|---|
@@ -270,6 +306,21 @@ Unidad de observación: producto + mes · Periodo: 2012-01 a 2025-12 · Filas: {
 | n_subpartidas | Número de subpartidas SUNAT que forman el producto | número | anual | SUNAT, cuadro G9 | -- |
 | precio_int_usd_kg | Precio internacional (café arábica, cacao, naranja para mandarinas) | US$/kg | mensual | Banco Mundial, Pink Sheet | https://thedocs.worldbank.org/.../CMO-Historical-Data-Monthly.xlsx |
 | indice_agricola_bm | Índice de precios agrícolas del Banco Mundial | 2010 = 100 | mensual | Banco Mundial, Pink Sheet | idem |
+
+## Archivo de datos crudos
+
+Archivo: `datos_crudos/datos_crudos_2024200535B.csv` · formato largo · un valor por fila, tal como viene de la fuente (sin editar)
+
+| Variable | Definición |
+|---|---|
+| fuente | BCRP (API), SUNAT (cuadro G7 o G9) o Banco Mundial (Pink Sheet) |
+| archivo | Archivo descargado en /datos_crudos del que sale el valor |
+| hoja | Hoja del Excel (año en SUNAT; nombre de la hoja en el Pink Sheet) |
+| serie | Nombre de la serie, descripción de la subpartida o columna del Pink Sheet |
+| codigo | Código de la serie BCRP o de la subpartida SUNAT |
+| periodo | Periodo tal como lo escribe la fuente (p. ej., Ene.2012, 2012-01, 2012M01) |
+| variable | Qué mide el valor (valor FOB, peso neto, precio, índice) |
+| valor_original | Valor sin transformar, guardado como texto |
 """, encoding="utf-8")
 log("Diccionario de variables actualizado")
 

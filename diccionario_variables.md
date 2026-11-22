@@ -19,3 +19,18 @@ Unidad de observación: producto + mes · Periodo: 2012-01 a 2025-12 · Filas: 1
 | n_subpartidas | Número de subpartidas SUNAT que forman el producto | número | anual | SUNAT, cuadro G9 | -- |
 | precio_int_usd_kg | Precio internacional (café arábica, cacao, naranja para mandarinas) | US$/kg | mensual | Banco Mundial, Pink Sheet | https://thedocs.worldbank.org/.../CMO-Historical-Data-Monthly.xlsx |
 | indice_agricola_bm | Índice de precios agrícolas del Banco Mundial | 2010 = 100 | mensual | Banco Mundial, Pink Sheet | idem |
+
+## Archivo de datos crudos
+
+Archivo: `datos_crudos/datos_crudos_2024200535B.csv` · formato largo · un valor por fila, tal como viene de la fuente (sin editar)
+
+| Variable | Definición |
+|---|---|
+| fuente | BCRP (API), SUNAT (cuadro G7 o G9) o Banco Mundial (Pink Sheet) |
+| archivo | Archivo descargado en /datos_crudos del que sale el valor |
+| hoja | Hoja del Excel (año en SUNAT; nombre de la hoja en el Pink Sheet) |
+| serie | Nombre de la serie, descripción de la subpartida o columna del Pink Sheet |
+| codigo | Código de la serie BCRP o de la subpartida SUNAT |
+| periodo | Periodo tal como lo escribe la fuente (p. ej., Ene.2012, 2012-01, 2012M01) |
+| variable | Qué mide el valor (valor FOB, peso neto, precio, índice) |
+| valor_original | Valor sin transformar, guardado como texto |

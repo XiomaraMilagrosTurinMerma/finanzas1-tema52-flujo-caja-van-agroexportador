@@ -49,3 +49,103 @@
 2026-11-20 11:28:49 | LIMPIEZA | Archivo guardado: datos_procesados_2024200535B.csv (1680 filas x 14 columnas)
 2026-11-20 11:28:49 | LIMPIEZA | SHA-256: 52d396c1362aaf3d465180f3621b9a52aff34490ab5d117fe00cc0188cb124ff
 2026-11-20 11:28:49 | LIMPIEZA | Diccionario de variables actualizado
+
+# Ejecución de 04_analisis.py - 2026-11-20 11:57:03
+2026-11-20 11:57:03 | Datos leídos: 1680 filas x 14 columnas
+2026-11-20 11:57:03 | Tabla guardada: salidas/tabla1_descriptivos_productos.csv y .tex
+2026-11-20 11:57:04 | Figura guardada: salidas/figura1_fob_anual_productos.png
+2026-11-20 11:57:05 | Figura guardada: salidas/figura2_precio_arandano_tc.png
+2026-11-20 11:57:05 | Tabla guardada: salidas/tabla2_volatilidad.csv y .tex
+2026-11-20 11:57:05 | Figura guardada: salidas/figura3_volatilidad.png
+2026-11-20 11:57:05 | Tabla guardada: salidas/tabla3_supuestos_proyecto.csv y .tex
+2026-11-20 11:57:05 | Tabla guardada: salidas/tabla4_flujo_caja.csv y .tex
+2026-11-20 11:57:05 | Tabla guardada: salidas/tabla5_indicadores.csv y .tex
+2026-11-20 11:57:05 | Figura guardada: salidas/figura4_flujo_caja.png
+2026-11-20 11:57:05 | Tabla guardada: salidas/tabla6_sensibilidad_precio.csv y .tex
+2026-11-20 11:57:06 | Tabla guardada: salidas/tabla7_sensibilidad_tc.csv y .tex
+2026-11-20 11:57:06 | Figura guardada: salidas/figura5_sensibilidad_precio_tc.png
+2026-11-20 11:57:07 | Figura guardada: salidas/figura6_mapa_calor_van.png
+2026-11-20 11:57:07 | Tabla guardada: salidas/tabla8_tornado.csv y .tex
+2026-11-20 11:57:07 | Figura guardada: salidas/figura7_tornado.png
+2026-11-20 11:57:07 | Tabla guardada: salidas/tabla9_escenarios.csv y .tex
+2026-11-20 11:57:14 | Tabla guardada: salidas/tabla10_montecarlo.csv y .tex
+2026-11-20 11:57:14 | Figura guardada: salidas/figura8_montecarlo.png
+2026-11-20 11:57:14 | VAN base = S/ 4,557,638 | TIR = 44.9% | B/C = 1.30 | PRI = 2.9 años
+2026-11-20 11:57:14 | Precio de equilibrio = US$ 4.65/kg | TC de equilibrio = S/ 2.740
+2026-11-20 11:57:14 | Monte Carlo: P(VAN<0) = 25.76%
+2026-11-20 11:57:14 | 04_analisis.py terminado: 10 tablas y 8 figuras en /salidas
+
+# Ejecución de 03_limpieza_datos.py - 2026-11-20 11:59:38
+2026-11-20 11:59:38 | LIMPIEZA | BCRP leído: 1680 filas producto-mes; 0 valores n.d.
+2026-11-20 11:59:41 | LIMPIEZA | SUNAT G7 unido: 12 meses sin dato (producto fuera de las principales 500 subpartidas)
+2026-11-20 11:59:50 | LIMPIEZA | Diferencia media |SUNAT G9 vs BCRP| por producto (%): arandanos=0.1, cacao=0.0, cafe=0.3, conservas_frutas_hortalizas=14.5, esparragos=0.1, frutas_congeladas=0.2, mandarinas=1.0, mangos=0.6, paltas=0.2, uvas=0.4
+2026-11-20 11:59:51 | LIMPIEZA | Banco Mundial unido: precio internacional para café, cacao y mandarinas (naranja) e índice agrícola para todos los productos
+2026-11-20 11:59:51 | LIMPIEZA | Controles: sin duplicados; 1680 filas; valores negativos: 0
+2026-11-20 11:59:51 | LIMPIEZA | Correlación FOB mensual BCRP vs SUNAT G7: 0.9996
+2026-11-20 11:59:51 | LIMPIEZA | Archivo guardado: datos_procesados_2024200535B.csv (1680 filas x 14 columnas)
+2026-11-20 11:59:51 | LIMPIEZA | SHA-256: dce94013e3dca12db9cb8fec04161354aeacb0df01f9c44eb01e6dda2d05bdbf
+2026-11-20 11:59:51 | LIMPIEZA | Diccionario de variables actualizado
+
+# Ejecución de 04_analisis.py - 2026-11-20 12:01:19
+2026-11-20 12:01:19 | Datos leídos: 1680 filas x 14 columnas
+2026-11-20 12:01:19 | Tabla guardada: salidas/tabla1_descriptivos_productos.csv y .tex
+2026-11-20 12:01:20 | Figura guardada: salidas/figura1_fob_anual_productos.png
+2026-11-20 12:01:21 | Figura guardada: salidas/figura2_precio_arandano_tc.png
+2026-11-20 12:01:21 | Tabla guardada: salidas/tabla2_volatilidad.csv y .tex
+2026-11-20 12:01:21 | Figura guardada: salidas/figura3_volatilidad.png
+2026-11-20 12:01:21 | Tabla guardada: salidas/tabla3_supuestos_proyecto.csv y .tex
+2026-11-20 12:01:21 | Tabla guardada: salidas/tabla4_flujo_caja.csv y .tex
+2026-11-20 12:01:21 | Tabla guardada: salidas/tabla5_indicadores.csv y .tex
+2026-11-20 12:01:21 | Figura guardada: salidas/figura4_flujo_caja.png
+2026-11-20 12:01:21 | Tabla guardada: salidas/tabla6_sensibilidad_precio.csv y .tex
+2026-11-20 12:01:21 | Tabla guardada: salidas/tabla7_sensibilidad_tc.csv y .tex
+2026-11-20 12:01:22 | Figura guardada: salidas/figura5_sensibilidad_precio_tc.png
+2026-11-20 12:01:22 | Figura guardada: salidas/figura6_mapa_calor_van.png
+2026-11-20 12:01:22 | Tabla guardada: salidas/tabla8_tornado.csv y .tex
+2026-11-20 12:01:22 | Figura guardada: salidas/figura7_tornado.png
+2026-11-20 12:01:22 | Tabla guardada: salidas/tabla9_escenarios.csv y .tex
+2026-11-20 12:01:30 | Tabla guardada: salidas/tabla10_montecarlo.csv y .tex
+2026-11-20 12:01:30 | Figura guardada: salidas/figura8_montecarlo.png
+2026-11-20 12:01:30 | VAN base = S/ 4,557,638 | TIR = 44.9% | B/C = 1.30 | PRI = 2.9 años
+2026-11-20 12:01:30 | Precio de equilibrio = US$ 4.65/kg | TC de equilibrio = S/ 2.740
+2026-11-20 12:01:30 | Monte Carlo: P(VAN<0) = 25.76%
+2026-11-20 12:01:30 | 04_analisis.py terminado: 10 tablas y 8 figuras en /salidas
+
+# Ejecución de 03_limpieza_datos.py - 2026-11-22 09:01:00
+2026-11-22 09:01:00 | LIMPIEZA | BCRP leído: 1680 filas producto-mes; 0 valores n.d.
+2026-11-22 09:01:03 | LIMPIEZA | SUNAT G7 unido: 12 meses sin dato (producto fuera de las principales 500 subpartidas)
+2026-11-22 09:01:12 | LIMPIEZA | Diferencia media |SUNAT G9 vs BCRP| por producto (%): arandanos=0.1, cacao=0.0, cafe=0.3, conservas_frutas_hortalizas=14.5, esparragos=0.1, frutas_congeladas=0.2, mandarinas=1.0, mangos=0.6, paltas=0.2, uvas=0.4
+2026-11-22 09:01:13 | LIMPIEZA | Banco Mundial unido: precio internacional para café, cacao y mandarinas (naranja) e índice agrícola para todos los productos
+2026-11-22 09:01:13 | LIMPIEZA | Controles: sin duplicados; 1680 filas; valores negativos: 0
+2026-11-22 09:01:13 | LIMPIEZA | Correlación FOB mensual BCRP vs SUNAT G7: 0.9996
+2026-11-22 09:01:13 | LIMPIEZA | Archivo guardado: datos_crudos/datos_crudos_2024200535B.csv (8814 valores originales de 4 fuentes)
+2026-11-22 09:01:13 | LIMPIEZA | Archivo guardado: datos_procesados_2024200535B.csv (1680 filas x 14 columnas)
+2026-11-22 09:01:13 | LIMPIEZA | SHA-256: dce94013e3dca12db9cb8fec04161354aeacb0df01f9c44eb01e6dda2d05bdbf
+2026-11-22 09:01:13 | LIMPIEZA | Diccionario de variables actualizado
+
+# Ejecución de 04_analisis.py - 2026-11-22 09:01:26
+2026-11-22 09:01:26 | Datos leídos: 1680 filas x 14 columnas
+2026-11-22 09:01:26 | Tabla guardada: salidas/tabla1_descriptivos_productos.csv y .tex
+2026-11-22 09:01:27 | Figura guardada: salidas/figura1_fob_anual_productos.png
+2026-11-22 09:01:27 | Figura guardada: salidas/figura2_precio_arandano_tc.png
+2026-11-22 09:01:27 | Tabla guardada: salidas/tabla2_volatilidad.csv y .tex
+2026-11-22 09:01:27 | Figura guardada: salidas/figura3_volatilidad.png
+2026-11-22 09:01:27 | Tabla guardada: salidas/tabla3_precios_internacionales.csv y .tex
+2026-11-22 09:01:28 | Figura guardada: salidas/figura4_precios_internacionales.png
+2026-11-22 09:01:28 | Tabla guardada: salidas/tabla4_supuestos_proyecto.csv y .tex
+2026-11-22 09:01:28 | Tabla guardada: salidas/tabla5_flujo_caja.csv y .tex
+2026-11-22 09:01:28 | Tabla guardada: salidas/tabla6_indicadores.csv y .tex
+2026-11-22 09:01:28 | Figura guardada: salidas/figura5_flujo_caja.png
+2026-11-22 09:01:28 | Tabla guardada: salidas/tabla7_sensibilidad_precio.csv y .tex
+2026-11-22 09:01:28 | Tabla guardada: salidas/tabla8_sensibilidad_tc.csv y .tex
+2026-11-22 09:01:29 | Figura guardada: salidas/figura6_sensibilidad_precio_tc.png
+2026-11-22 09:01:29 | Figura guardada: salidas/figura7_mapa_calor_van.png
+2026-11-22 09:01:29 | Tabla guardada: salidas/tabla9_tornado.csv y .tex
+2026-11-22 09:01:29 | Figura guardada: salidas/figura8_tornado.png
+2026-11-22 09:01:29 | Tabla guardada: salidas/tabla10_escenarios.csv y .tex
+2026-11-22 09:01:36 | Tabla guardada: salidas/tabla11_montecarlo.csv y .tex
+2026-11-22 09:01:36 | Figura guardada: salidas/figura9_montecarlo.png
+2026-11-22 09:01:36 | VAN base = S/ 2,993,982 | TIR = 27.0% | B/C = 1.19 | PRI = 4.0 años
+2026-11-22 09:01:36 | Precio de equilibrio = US$ 5.18/kg | TC de equilibrio = S/ 3.051
+2026-11-22 09:01:36 | Monte Carlo: P(VAN<0) = 37.25%
+2026-11-22 09:01:36 | 04_analisis.py terminado: 11 tablas y 9 figuras en /salidas

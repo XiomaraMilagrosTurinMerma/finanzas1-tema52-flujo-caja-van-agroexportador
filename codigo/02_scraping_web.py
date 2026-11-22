@@ -41,6 +41,11 @@ LOG = BASE / "log_ejecucion.txt"
 INCIDENCIAS = BASE / "incidencias_fuente.md"
 CRUDOS.mkdir(exist_ok=True)
 
+# Periodo de estudio (parámetros congelados; los cuadros de SUNAT traen una hoja por año)
+FECHA_INICIO = "2012-01"
+FECHA_CORTE = "2025-12"
+ANIOS = range(int(FECHA_INICIO[:4]), int(FECHA_CORTE[:4]) + 1)
+
 PAUSA = 1.5
 CABECERAS = {"User-Agent": "Mozilla/5.0 (proyecto academico UNCP - Finanzas I; "
                            "contacto: 2024200535B)"}
@@ -126,7 +131,7 @@ for cuadro, descripcion in CUADROS.items():
         anios = [h for h in hojas if h.strip().isdigit()]
         registrar(f"SUNAT {cuadro}", url, r.status_code, f"{len(r.content) // 1024} KB",
                   f"{descripcion}; años {anios[0]}-{anios[-1]}; publicado: {publicado}")
-        faltan = [a for a in range(2012, 2026) if str(a) not in anios]
+        faltan = [a for a in ANIOS if str(a) not in anios]
         if faltan:
             anotar_incidencia(url, r.status_code,
                               f"El cuadro {cuadro} no tiene hojas para los años {faltan}.")
