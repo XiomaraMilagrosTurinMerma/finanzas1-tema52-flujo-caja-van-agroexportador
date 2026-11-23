@@ -149,3 +149,30 @@
 2026-11-22 09:01:36 | Precio de equilibrio = US$ 5.18/kg | TC de equilibrio = S/ 3.051
 2026-11-22 09:01:36 | Monte Carlo: P(VAN<0) = 37.25%
 2026-11-22 09:01:36 | 04_analisis.py terminado: 11 tablas y 9 figuras en /salidas
+
+# Ejecución de 04_analisis.py - 2026-11-23 12:31:14
+2026-11-23 12:31:14 | Datos leídos: 1680 filas x 14 columnas
+2026-11-23 12:31:14 | Tabla guardada: salidas/tabla1_descriptivos_productos.csv y .tex
+2026-11-23 12:31:15 | Figura guardada: salidas/figura1_fob_anual_productos.png
+2026-11-23 12:31:15 | Figura guardada: salidas/figura2_precio_arandano_tc.png
+2026-11-23 12:31:15 | Tabla guardada: salidas/tabla2_volatilidad.csv y .tex
+2026-11-23 12:31:15 | Figura guardada: salidas/figura3_volatilidad.png
+2026-11-23 12:31:15 | Tabla guardada: salidas/tabla3_precios_internacionales.csv y .tex
+2026-11-23 12:31:15 | Figura guardada: salidas/figura4_precios_internacionales.png
+2026-11-23 12:31:15 | Tabla guardada: salidas/tabla4_supuestos_proyecto.csv y .tex
+2026-11-23 12:31:15 | Tabla guardada: salidas/tabla5_flujo_caja.csv y .tex
+2026-11-23 12:31:15 | Tabla guardada: salidas/tabla6_indicadores.csv y .tex
+2026-11-23 12:31:16 | Figura guardada: salidas/figura5_flujo_caja.png
+2026-11-23 12:31:16 | Tabla guardada: salidas/tabla7_sensibilidad_precio.csv y .tex
+2026-11-23 12:31:16 | Tabla guardada: salidas/tabla8_sensibilidad_tc.csv y .tex
+2026-11-23 12:31:16 | Figura guardada: salidas/figura6_sensibilidad_precio_tc.png
+2026-11-23 12:31:17 | Figura guardada: salidas/figura7_mapa_calor_van.png
+2026-11-23 12:31:17 | Tabla guardada: salidas/tabla9_tornado.csv y .tex
+2026-11-23 12:31:17 | Figura guardada: salidas/figura8_tornado.png
+2026-11-23 12:31:17 | Tabla guardada: salidas/tabla10_escenarios.csv y .tex
+2026-11-23 12:31:22 | Tabla guardada: salidas/tabla11_montecarlo.csv y .tex
+2026-11-23 12:31:23 | Figura guardada: salidas/figura9_montecarlo.png
+2026-11-23 12:31:23 | VAN base = S/ 2,993,982 | TIR = 27.0% | B/C = 1.19 | PRI = 4.0 años
+2026-11-23 12:31:23 | Precio de equilibrio = US$ 5.18/kg | TC de equilibrio = S/ 3.051
+2026-11-23 12:31:23 | Monte Carlo: P(VAN<0) = 37.25%
+2026-11-23 12:31:23 | 04_analisis.py terminado: 11 tablas y 9 figuras en /salidas

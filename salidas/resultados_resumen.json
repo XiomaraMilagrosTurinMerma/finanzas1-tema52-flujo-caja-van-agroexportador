@@ -1,5 +1,5 @@
 {
-  "fecha_ejecucion": "2026-11-22 09:01:36",
+  "fecha_ejecucion": "2026-11-23 12:31:23",
   "precio_base_usd_kg": 6.3783,
   "tc_base": 3.7566,
   "van_base_soles": 2993982.26,
@@ -14,5 +14,45 @@
   "correlacion": -0.2696,
   "montecarlo_prob_van_negativo": 0.3725,
   "montecarlo_van_p5": -5287262.64,
-  "montecarlo_van_p95": 14173743.21
+  "montecarlo_van_p95": 14173743.21,
+  "parametros": {
+    "hectareas": 10,
+    "horizonte": 10,
+    "anio_inicio": 2026,
+    "rendimiento_t_ha": 20,
+    "curva_produccion": [
+      0,
+      0,
+      0.5,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "inversion_usd_ha": 65000,
+    "costo_fijo_usd_ha": 25935.0,
+    "costo_variable_usd_kg": 2.33,
+    "exportable": 0.9,
+    "cok": 0.12,
+    "tasa_ir": [
+      0.15,
+      0.15,
+      0.15,
+      0.15,
+      0.15,
+      0.15,
+      0.15,
+      0.15,
+      0.15,
+      0.295
+    ],
+    "precio_min_hist": 4.7871,
+    "precio_max_hist": 11.4904,
+    "tc_min_hist": 2.6375,
+    "tc_max_hist": 3.8812
+  }
 }

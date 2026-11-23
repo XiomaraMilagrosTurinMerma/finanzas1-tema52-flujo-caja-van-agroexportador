@@ -375,7 +375,7 @@ t3 = pd.DataFrame([
     ["Precio FOB base", f"US$ {P_BASE:.2f} por kg (prom. 2021-2025)", "SUNAT, cuadro G9"],
     ["Tipo de cambio base", f"S/ {TC_BASE:.3f} por US$ (prom. 2021-2025)", "BCRP (PN01207PM)"],
     ["Impuesto a la renta", "15 % (2027-2035); 29.5 % (2036)", "Ley 32434"],
-    ["Costo de oportunidad (COK)", f"{COK:.0%} (sensibilidad 8 %-16 %)", "MEF (2024); Damodaran (2026)"],
+    ["Costo de oportunidad (COK)", f"{COK:.0%} (sensibilidad 8 %-16 %)", "MEF (2024); United Press International (2026)"],
 ], columns=["Variable", "Valor", "Fuente"])
 guardar_tabla(t3, "tabla4_supuestos_proyecto", "Supuestos del proyecto de 10 ha de arándano",
               "La inversión y los costos se convierten a soles con el tipo de cambio base. Elaboración propia.")
@@ -616,6 +616,16 @@ resumen = {
     "montecarlo_prob_van_negativo": round(PROB_NEG, 4),
     "montecarlo_van_p5": round(float(np.percentile(vans, 5)), 2),
     "montecarlo_van_p95": round(float(np.percentile(vans, 95)), 2),
+    # Parámetros del modelo (el dashboard los usa para recalcular el VAN en vivo)
+    "parametros": {
+        "hectareas": HA, "horizonte": HORIZONTE, "anio_inicio": ANIO_INICIO,
+        "rendimiento_t_ha": RENDIMIENTO_T_HA, "curva_produccion": CURVA,
+        "inversion_usd_ha": INV_USD_HA, "costo_fijo_usd_ha": round(FIJO_USD_HA, 2),
+        "costo_variable_usd_kg": round(VAR_USD_KG, 4), "exportable": EXPORTABLE, "cok": COK,
+        "tasa_ir": [tasa_ir(ANIO_INICIO + t) for t in range(1, HORIZONTE + 1)],
+        "precio_min_hist": round(P_MIN, 4), "precio_max_hist": round(P_MAX, 4),
+        "tc_min_hist": round(TC_MIN, 4), "tc_max_hist": round(TC_MAX, 4),
+    },
 }
 (SALIDAS / "resultados_resumen.json").write_text(json.dumps(resumen, indent=2, ensure_ascii=False), encoding="utf-8")
 base.round(2).to_csv(SALIDAS / "flujo_caja_base_detalle.csv", index=False, lineterminator="\n")
