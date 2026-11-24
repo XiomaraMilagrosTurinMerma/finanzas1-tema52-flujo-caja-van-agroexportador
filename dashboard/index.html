@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-tema="oscuro">
+<script>try{const t=localStorage.getItem("tema");if(t)document.documentElement.dataset.tema=t;}catch(e){}</script>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,18 +13,19 @@
      el código (/datos_procesados y /salidas) y recalcula el VAN con el mismo
      modelo de 04_analisis.py. -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js"></script>
 <style>
   :root{
     --bg:#f7f6f2; --card:#ffffff; --ink:#1d1c1a; --ink2:#52514e; --muted:#8a8984; --line:#e6e5e0;
-    --azul:#2a78d6; --naranja:#eb6834; --rojo:#e34948; --verde:#1baf7a; --acento:#0F6E5A;
+    --azul:#3F51C8; --naranja:#F0A22E; --rojo:#E0453F; --verde:#12A37F; --acento:#0F6E5A; --arandano:#34407A;
   }
-  @media (prefers-color-scheme: dark){
-    :root{ --bg:#141413; --card:#1f1e1c; --ink:#f2f1ed; --ink2:#c9c8c2; --muted:#9a9993; --line:#34332f;
-           --azul:#4a90e2; --naranja:#f07f50; --rojo:#ef6463; --verde:#3cc08f; --acento:#3bb39a; }
-  }
+  :root[data-tema="oscuro"]{ --bg:#0D0F13; --card:#171A20; --ink:#F2F1ED; --ink2:#C9C8C2; --muted:#8E8D87; --line:#2A2E36;
+           --azul:#7B8CFF; --naranja:#F5B44F; --rojo:#FF6B66; --verde:#3CD1A0; --acento:#3BB39A; --arandano:#9AA4E6; }
+  :root[data-tema="oscuro"] .card{box-shadow:0 0 0 1px rgba(255,255,255,0.02)}
+  .tema{position:absolute;top:20px;right:24px;border:1px solid rgba(255,255,255,0.5);background:rgba(255,255,255,0.12);color:#fff;border-radius:999px;padding:5px 12px;font-size:12px;cursor:pointer;margin:0}
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-  header{background:var(--acento);color:#fff;padding:22px 28px}
+  header{position:relative;background:linear-gradient(120deg,#0F6E5A 0%,#1F5872 55%,#34407A 100%);color:#fff;padding:22px 28px;border-bottom:4px solid #F0A22E}
   header h1{margin:0 0 4px;font-size:22px;font-weight:650}
   header p{margin:0;opacity:.9;font-size:13px}
   header a{color:#fff}
@@ -34,6 +36,7 @@
   .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
   .card h2{margin:0 0 4px;font-size:15px}
   .card .sub{margin:0 0 12px;color:var(--muted);font-size:12px}
+  .kpis .kpi{border-top:3px solid var(--naranja)}
   .kpi .v{font-size:21px;font-weight:650;margin-top:2px;font-variant-numeric:tabular-nums;white-space:nowrap}
   .kpi .l{color:var(--ink2);font-size:12px}
   .kpi .n{color:var(--muted);font-size:11px;margin-top:2px}
@@ -60,6 +63,7 @@
 </head>
 <body>
 <header>
+  <button class="tema" id="botonTema" type="button"></button>
   <h1>Flujo de caja y VAN de un proyecto agroexportador de arándano</h1>
   <p>Sensibilidad al precio FOB y al tipo de cambio · Perú, 2012–2025 · Xiomara Milagros Turin Merma (2024200535B) · Finanzas I, UNCP 2026-II ·
      <a href="https://github.com/XiomaraMilagrosTurinMerma/finanzas1-tema52-flujo-caja-van-agroexportador">Repositorio</a></p>
@@ -94,6 +98,12 @@
     </div>
   </section>
 
+  <section class="card" style="margin-top:16px">
+    <h2>Superficie 3D del VAN: precio FOB × tipo de cambio</h2>
+    <p class="sub">Gira la superficie con el mouse y acerca con la rueda. Verde: VAN positivo; rojo: pérdida. El plano gris es VAN = 0 y el punto ámbar es el escenario elegido en el simulador; la superficie se recalcula si cambias rendimiento, inversión, fracción exportable o COK.</p>
+    <div id="sup3d" style="height:520px"></div>
+  </section>
+
   <section class="grid dos" style="margin-top:16px">
     <div class="card">
       <h2>VAN según el precio FOB</h2>
@@ -102,7 +112,7 @@
     </div>
     <div class="card">
       <h2>VAN según precio FOB y tipo de cambio</h2>
-      <p class="sub">Millones de S/ · azul: VAN positivo · rojo: VAN negativo (de <code>salidas/matriz_van_precio_tc.csv</code>)</p>
+      <p class="sub">Millones de S/ · verde: VAN positivo · rojo: VAN negativo (de <code>salidas/matriz_van_precio_tc.csv</code>)</p>
       <div id="mapa"></div>
     </div>
   </section>
@@ -247,6 +257,30 @@ function iniciar(datos, vol, mapa){
     graf.flujo.update();
     const curva=[]; for(let p=3;p<=12.001;p+=0.25) curva.push({x:p,y:van(flujo(P,Object.assign({},s,{precio:p})),s.cok)/1e6});
     graf.vp.data.datasets[0].data=curva; graf.vp.data.datasets[1].data=[{x:s.precio,y:v/1e6}]; graf.vp.update();
+    superficie(s, v);
+  }
+  function superficie(s, v){
+    if(typeof Plotly==="undefined") return;
+    const px=[], ey=[]; for(let i=0;i<=24;i++) px.push(+(3+i*0.375).toFixed(3)); for(let j=0;j<=20;j++) ey.push(+(2.5+j*0.1).toFixed(2));
+    const z=ey.map(e=>px.map(p=>van(flujo(P,Object.assign({},s,{precio:p,tc:e})),s.cok)/1e6));
+    const zmax=Math.max(...z.flat().map(Math.abs));
+    const tinta=C("--ink2"), linea=C("--line");
+    const eje=t=>({title:{text:t,font:{size:12,color:tinta}},gridcolor:linea,zerolinecolor:linea,tickfont:{size:10,color:tinta},backgroundcolor:"rgba(0,0,0,0)"});
+    const datos=[
+      {type:"surface",x:px,y:ey,z:z,cmid:0,
+       colorscale:[[0,"#B3261E"],[0.35,"#F08A5D"],[0.5,"#F7F3E8"],[0.65,"#7FD1AE"],[1,"#0F6E5A"]],
+       colorbar:{title:{text:"VAN<br>mill. S/",font:{size:11,color:tinta}},tickfont:{color:tinta},len:0.75,thickness:14},
+       contours:{z:{show:true,usecolormap:false,color:"rgba(30,30,28,0.35)",width:1,start:-30,end:40,size:2}},
+       hovertemplate:"Precio US$ %{x:.2f}/kg<br>TC S/ %{y:.2f}<br>VAN S/ %{z:.2f} mill.<extra></extra>"},
+      {type:"surface",x:[3,12],y:[2.5,4.5],z:[[0,0],[0,0]],showscale:false,opacity:0.35,
+       colorscale:[[0,"#8A8984"],[1,"#8A8984"]],hoverinfo:"skip"},
+      {type:"scatter3d",mode:"markers+text",x:[s.precio],y:[s.tc],z:[v/1e6],text:["Escenario elegido"],textposition:"top center",
+       textfont:{color:tinta,size:11},marker:{size:7,color:"#F0A22E",line:{color:"#1E1E1C",width:1}},
+       hovertemplate:"Escenario elegido<br>VAN S/ %{z:.2f} mill.<extra></extra>"}];
+    const layout={uirevision:"fijo",margin:{l:0,r:0,t:10,b:0},paper_bgcolor:"rgba(0,0,0,0)",
+      scene:{xaxis:eje("Precio FOB (US$/kg)"),yaxis:eje("Tipo de cambio (S/ por US$)"),zaxis:eje("VAN (millones de S/)"),
+             camera:{eye:{x:1.35,y:-1.45,z:0.85},center:{x:0,y:0,z:-0.1}},aspectmode:"manual",aspectratio:{x:1.3,y:1,z:0.7}}};
+    Plotly.react("sup3d",datos,layout,{displaylogo:false,responsive:true});
   }
   poner(base); ["precio","tc","rend","inv","exp","cok"].forEach(id=>document.getElementById(id).addEventListener("input",actualizar));
   reset.onclick=()=>{poner(base);actualizar();}; actualizar();
@@ -254,7 +288,7 @@ function iniciar(datos, vol, mapa){
   // Mapa de calor
   const precios=Object.keys(mapa[0]).filter(k=>k!=="tc/precio");
   const lim=Math.max(...mapa.flatMap(f=>precios.map(p=>Math.abs(+f[p]))));
-  const color=v=>{const a=Math.min(Math.abs(v)/lim,1)*0.85+0.08; return v>=0?`rgba(42,120,214,${a})`:`rgba(227,73,72,${a})`;};
+  const color=v=>{const a=Math.min(Math.abs(v)/lim,1)*0.85+0.08; return v>=0?`rgba(15,110,90,${a})`:`rgba(196,48,40,${a})`;};
   let h=`<table class="mapa"><tr><th>TC \\ Precio</th>${precios.map(p=>`<th>${(+p).toFixed(1)}</th>`).join("")}</tr>`;
   [...mapa].reverse().forEach(f=>{h+=`<tr><th>${(+f["tc/precio"]).toFixed(2)}</th>`+precios.map(p=>{const v=+f[p];
       return `<td title="Precio US$ ${p} · TC S/ ${f["tc/precio"]} · VAN ${soles(v*1e6)}" style="background:${color(v)};color:${Math.abs(v)/lim>0.5?'#fff':C('--ink')}">${v.toFixed(1)}</td>`;}).join("")+"</tr>";});
@@ -295,6 +329,10 @@ function iniciar(datos, vol, mapa){
     options:opciones({indexAxis:"y",plugins:{legend:{display:false}},interaction:{mode:"nearest",intersect:true},
       scales:{x:{grid:{color:C("--line")},ticks:{color:C("--ink2"),callback:x=>x+" %"}},y:{grid:{display:false},ticks:{color:C("--ink2")}}}})});
 }
+const bt=document.getElementById("botonTema");
+bt.textContent = document.documentElement.dataset.tema==="oscuro" ? "☀ Modo claro" : "☾ Modo oscuro";
+bt.onclick=()=>{ const n = document.documentElement.dataset.tema==="oscuro" ? "claro" : "oscuro";
+  try{localStorage.setItem("tema",n);}catch(e){} document.documentElement.dataset.tema=n; location.reload(); };
 cargar();
 </script>
 </body>

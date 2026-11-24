@@ -21,6 +21,7 @@ y el dashboard).
 """
 
 import json
+import re
 from datetime import datetime
 from pathlib import Path
 
@@ -38,8 +39,8 @@ BASE = Path(__file__).resolve().parent.parent
 DATOS = BASE / "datos_procesados" / "datos_procesados_2024200535B.csv"
 SALIDAS = BASE / "salidas"
 SALIDAS.mkdir(exist_ok=True)
-for viejo in list(SALIDAS.glob("*.png")) + list(SALIDAS.glob("*.csv")) + list(SALIDAS.glob("*.tex")) + \
-        list(SALIDAS.glob("*.json")):
+for viejo in list(SALIDAS.glob("*.png")) + list(SALIDAS.glob("*.pdf")) + list(SALIDAS.glob("*.csv")) + \
+        list(SALIDAS.glob("*.tex")) + list(SALIDAS.glob("*.json")):
     viejo.unlink()                          # /salidas se regenera completa en cada ejecución
 LOG = BASE / "log_ejecucion.txt"
 
@@ -55,20 +56,27 @@ def log(texto):
 
 
 def a_latex(df, titulo, etiqueta, nota):
-    """Convierte una tabla en código LaTeX (tabla APA con booktabs)."""
-    cols = "l" + "r" * (df.shape[1] - 1)
-    filas = []
-    for _, fila in df.iterrows():
-        celdas = [str(v).replace("%", r"\%").replace("_", r"\_").replace("&", r"\&").replace("$", r"\$")
-                  for v in fila]
-        filas.append(" & ".join(celdas) + r" \\")
-    encab = " & ".join(str(c).replace("%", r"\%").replace("_", r"\_").replace("$", r"\$")
-                       for c in df.columns) + r" \\"
+    """Convierte una tabla en código LaTeX (tabla APA con booktabs y tabularx).
+    Las columnas se ajustan al ancho de la página: los encabezados largos pasan a
+    dos líneas. Las columnas con números se alinean a la derecha y las de texto a
+    la izquierda."""
+    def tex(v):
+        return str(v).replace("%", r"\%").replace("_", r"\_").replace("&", r"\&").replace("$", r"\$")
+
+    def es_numero(v):
+        return bool(re.fullmatch(r"[-+]?[\d,.]+ ?%?|[-+]?\d+(\.\d+)? ?%|(S/|US\$) -?[\d,.]+|--|n\.d\.|Base", str(v).strip()))
+
+    cols = ""
+    for k, c in enumerate(df.columns):
+        alinear = r"\raggedleft" if k > 0 and df[c].map(es_numero).all() else r"\raggedright"
+        cols += rf">{{{alinear}\arraybackslash}}X"
+    filas = [" & ".join(tex(v) for v in fila) + r" \\" for _, fila in df.iterrows()]
+    encab = " & ".join(rf"\textbf{{{tex(c)}}}" for c in df.columns) + r" \\"
     return "\n".join([
         r"\begin{table}[H]", r"\centering", r"\small",
         rf"\caption{{{titulo}}}", rf"\label{{{etiqueta}}}",
-        rf"\begin{{tabular}}{{{cols}}}", r"\toprule", encab, r"\midrule",
-        *filas, r"\bottomrule", r"\end{tabular}",
+        rf"\begin{{tabularx}}{{\linewidth}}{{{cols}}}", r"\toprule", encab, r"\midrule",
+        *filas, r"\bottomrule", r"\end{tabularx}",
         rf"\par\vspace{{2pt}}\parbox{{\linewidth}}{{\footnotesize\textit{{Nota.}} {nota}}}",
         r"\end{table}", ""])
 
@@ -81,8 +89,9 @@ def guardar_tabla(df, nombre, titulo, nota):
 
 def guardar_figura(fig, nombre):
     fig.savefig(SALIDAS / f"{nombre}.png", dpi=300, bbox_inches="tight")
+    fig.savefig(SALIDAS / f"{nombre}.pdf", bbox_inches="tight")   # versión vectorial para el artículo en LaTeX
     plt.close(fig)
-    log(f"Figura guardada: salidas/{nombre}.png")
+    log(f"Figura guardada: salidas/{nombre}.png y .pdf")
 
 
 def miles(x, dec=0):
