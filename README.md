@@ -39,7 +39,7 @@ Todas las cifras salen de `codigo/04_analisis.py` y están en `salidas/resultado
 ├── datos_crudos/                 # archivos tal como salen de cada fuente + datos_crudos_2024200535B.csv
 ├── datos_procesados/             # datos_procesados_2024200535B.csv (panel de 1680 filas x 14 columnas)
 ├── salidas/                      # 11 tablas (.csv y .tex) y 9 figuras (.png y .pdf) del artículo
-├── dashboard/                    # dashboard interactivo (lee /datos_procesados y /salidas)
+├── dashboard/                    # dashboard interactivo (index.html + datos_dashboard.js generado por 04)
 ├── diccionario_variables.md
 ├── incidencias_fuente.md
 ├── log_ejecucion.txt
@@ -87,8 +87,8 @@ semilla el código de matrícula (`2024200535`), por lo que sus resultados son r
 ## Dashboard
 
 Abrir https://xiomaramilagrosturinmerma.github.io/finanzas1-tema52-flujo-caja-van-agroexportador/dashboard/.
-Para verlo en la computadora: ejecutar `python -m http.server` en la carpeta del proyecto y entrar a
-`http://localhost:8000/dashboard/`. El dashboard no tiene cifras escritas a mano: lee los archivos de
+Para verlo en la computadora basta abrir `dashboard/index.html` con doble clic: `04_analisis.py` guarda una copia
+de los datos en `dashboard/datos_dashboard.js`. Los gráficos necesitan conexión a internet. El dashboard no tiene cifras escritas a mano: lee los archivos de
 `/datos_procesados` y `/salidas`, y recalcula el VAN con el mismo modelo de `04_analisis.py`. Incluye un
 simulador, una superficie 3D del VAN según el precio FOB y el tipo de cambio, y modo oscuro o claro.
 

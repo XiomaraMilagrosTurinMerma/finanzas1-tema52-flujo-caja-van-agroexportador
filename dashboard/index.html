@@ -14,6 +14,7 @@
      modelo de 04_analisis.py. -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js"></script>
+<script src="datos_dashboard.js"></script>
 <style>
   :root{
     --bg:#f7f6f2; --card:#ffffff; --ink:#1d1c1a; --ink2:#52514e; --muted:#8a8984; --line:#e6e5e0;
@@ -69,8 +70,7 @@
      <a href="https://github.com/XiomaraMilagrosTurinMerma/finanzas1-tema52-flujo-caja-van-agroexportador">Repositorio</a></p>
 </header>
 <main>
-  <div id="error">No se pudieron leer los archivos de datos. Abre el dashboard desde GitHub Pages o, en tu computadora,
-    ejecuta <code>python -m http.server</code> en la carpeta del proyecto y entra a <code>http://localhost:8000/dashboard/</code>.</div>
+  <div id="error">No se pudieron leer los datos. Ejecuta <code>codigo/04_analisis.py</code> para generar <code>dashboard/datos_dashboard.js</code>, o abre el dashboard desde GitHub Pages. Los gráficos necesitan conexión a internet.</div>
 
   <section class="grid kpis" id="kpis"></section>
 
@@ -193,10 +193,16 @@ function tir(f){ let lo=-0.99,hi=5; if(van(f,lo)*van(f,hi)>0) return NaN;
 let R, P, graf={};
 async function cargar(){
   try{
-    R = await (await fetch(`${BASE}/salidas/resultados_resumen.json`)).json();
-    const datos = csv(await (await fetch(`${BASE}/datos_procesados/datos_procesados_2024200535B.csv`)).text());
-    const vol = csv(await (await fetch(`${BASE}/salidas/tabla2_volatilidad.csv`)).text());
-    const mapa = csv(await (await fetch(`${BASE}/salidas/matriz_van_precio_tc.csv`)).text());
+    let datos, vol, mapa;
+    const D = window.DATOS_DASHBOARD;          // copia que genera 04_analisis.py (sirve sin servidor)
+    if (D) {
+      R = D.resumen; datos = csv(D.datos_csv); vol = csv(D.volatilidad_csv); mapa = csv(D.matriz_csv);
+    } else {
+      R = await (await fetch(`${BASE}/salidas/resultados_resumen.json`)).json();
+      datos = csv(await (await fetch(`${BASE}/datos_procesados/datos_procesados_2024200535B.csv`)).text());
+      vol = csv(await (await fetch(`${BASE}/salidas/tabla2_volatilidad.csv`)).text());
+      mapa = csv(await (await fetch(`${BASE}/salidas/matriz_van_precio_tc.csv`)).text());
+    }
     P = Object.assign({}, R.parametros, {tc_base:R.tc_base});
     iniciar(datos, vol, mapa);
   }catch(e){ document.getElementById("error").style.display="block"; console.error(e); }

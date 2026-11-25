@@ -637,6 +637,21 @@ resumen = {
     },
 }
 (SALIDAS / "resultados_resumen.json").write_text(json.dumps(resumen, indent=2, ensure_ascii=False), encoding="utf-8")
+
+# Copia de los datos para el dashboard: así también funciona al abrir dashboard/index.html
+# con doble clic, sin servidor (el navegador no deja leer archivos locales con fetch).
+DASH = BASE / "dashboard"
+if DASH.exists():
+    paquete = {
+        "resumen": resumen,
+        "datos_csv": DATOS.read_text(encoding="utf-8"),
+        "volatilidad_csv": (SALIDAS / "tabla2_volatilidad.csv").read_text(encoding="utf-8"),
+        "matriz_csv": (SALIDAS / "matriz_van_precio_tc.csv").read_text(encoding="utf-8"),
+    }
+    (DASH / "datos_dashboard.js").write_text(
+        "// Archivo generado por codigo/04_analisis.py. No editar a mano.\n"
+        "window.DATOS_DASHBOARD = " + json.dumps(paquete, ensure_ascii=False) + ";\n", encoding="utf-8")
+    log("Datos del dashboard guardados: dashboard/datos_dashboard.js")
 base.round(2).to_csv(SALIDAS / "flujo_caja_base_detalle.csv", index=False, lineterminator="\n")
 log(f"VAN base = S/ {VAN_BASE:,.0f} | TIR = {TIR_BASE:.1%} | B/C = {BC:.2f} | PRI = {PRI:.1f} años")
 log(f"Precio de equilibrio = US$ {P_EQ:.2f}/kg | TC de equilibrio = S/ {TC_EQ:.3f}")
