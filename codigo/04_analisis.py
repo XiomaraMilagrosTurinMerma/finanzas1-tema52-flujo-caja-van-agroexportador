@@ -572,8 +572,9 @@ guardar_tabla(t9, "tabla10_escenarios", "VAN y TIR en escenarios históricos de 
 # ==================================================================
 # El precio y el TC siguen un paseo aleatorio lognormal (movimiento browniano
 # geométrico sin tendencia): cada año reciben un choque con la volatilidad y la
-# correlación históricas, y el choque se acumula. Semilla = código de matrícula.
-rng = np.random.default_rng(2024200535)
+# correlación históricas, y el choque se acumula. Semilla = cuatro últimos dígitos del código de matrícula (0535), como pide la consigna.
+SEMILLA = 535                                 # cuatro últimos dígitos del código de matrícula 2024200535B (0535)
+rng = np.random.default_rng(SEMILLA)
 N = 10_000
 cov = np.array([[VOL_P ** 2, CORR * VOL_P * VOL_TC], [CORR * VOL_P * VOL_TC, VOL_TC ** 2]])
 vans = np.empty(N)
@@ -598,7 +599,7 @@ t10 = pd.DataFrame([
 guardar_tabla(t10, "tabla11_montecarlo", "Resultados de la simulación de Monte Carlo",
               "Precio y TC simulados como paseo aleatorio lognormal; volatilidades y correlación estimadas con las "
               "variaciones logarítmicas anuales 2012--2025. "
-              "Semilla aleatoria: 2024200535. Elaboración propia.")
+              "Semilla aleatoria: 0535 (cuatro últimos dígitos del código de matrícula). Elaboración propia.")
 fig, ax = plt.subplots(figsize=(8, 3.6))
 lim_inf, lim_sup = np.percentile(vans / 1e6, [0.5, 99.5])
 ax.hist(np.clip(vans / 1e6, lim_inf, lim_sup), bins=60, color=AZUL, edgecolor="white", linewidth=0.4)

@@ -24,7 +24,7 @@ sensibilidad de su VAN al precio FOB y al tipo de cambio, con datos oficiales ob
 | Periodo de recuperación | 4.0 años (5.1 años descontado) |
 | Precio FOB de equilibrio (VAN = 0) | US$ 5.18/kg (base: US$ 6.38/kg) |
 | Tipo de cambio de equilibrio | S/ 3.051 por US$ (base: S/ 3.757) |
-| Probabilidad de VAN negativo (Monte Carlo, 10 000 escenarios) | 37.3 % |
+| Probabilidad de VAN negativo (Monte Carlo, 10 000 escenarios) | 37.7 % |
 
 Todas las cifras salen de `codigo/04_analisis.py` y están en `salidas/resultados_resumen.json`.
 
@@ -79,7 +79,7 @@ python codigo/04_analisis.py
 ```
 
 `04_analisis.py` borra y vuelve a generar todo el contenido de `/salidas`. La simulación de Monte Carlo usa como
-semilla el código de matrícula (`2024200535`), por lo que sus resultados son reproducibles.
+semilla los cuatro últimos dígitos del código de matrícula (`0535`), por lo que sus resultados son reproducibles.
 
 > Si se vuelven a ejecutar 01 y 02 en otra fecha, las fuentes pueden haber actualizado o revisado sus cifras. Para
 > reproducir exactamente los resultados del artículo, basta ejecutar 03 y 04 con los archivos de `/datos_crudos`.

@@ -231,3 +231,31 @@
 2026-11-25 16:40:11 | Precio de equilibrio = US$ 5.18/kg | TC de equilibrio = S/ 3.051
 2026-11-25 16:40:11 | Monte Carlo: P(VAN<0) = 37.25%
 2026-11-25 16:40:11 | 04_analisis.py terminado: 11 tablas y 9 figuras en /salidas
+
+# Ejecución de 04_analisis.py - 2026-11-25 17:14:48
+2026-11-25 17:14:48 | Datos leídos: 1680 filas x 14 columnas
+2026-11-25 17:14:48 | Tabla guardada: salidas/tabla1_descriptivos_productos.csv y .tex
+2026-11-25 17:14:50 | Figura guardada: salidas/figura1_fob_anual_productos.png y .pdf
+2026-11-25 17:14:50 | Figura guardada: salidas/figura2_precio_arandano_tc.png y .pdf
+2026-11-25 17:14:51 | Tabla guardada: salidas/tabla2_volatilidad.csv y .tex
+2026-11-25 17:14:51 | Figura guardada: salidas/figura3_volatilidad.png y .pdf
+2026-11-25 17:14:51 | Tabla guardada: salidas/tabla3_precios_internacionales.csv y .tex
+2026-11-25 17:14:52 | Figura guardada: salidas/figura4_precios_internacionales.png y .pdf
+2026-11-25 17:14:52 | Tabla guardada: salidas/tabla4_supuestos_proyecto.csv y .tex
+2026-11-25 17:14:52 | Tabla guardada: salidas/tabla5_flujo_caja.csv y .tex
+2026-11-25 17:14:52 | Tabla guardada: salidas/tabla6_indicadores.csv y .tex
+2026-11-25 17:14:52 | Figura guardada: salidas/figura5_flujo_caja.png y .pdf
+2026-11-25 17:14:52 | Tabla guardada: salidas/tabla7_sensibilidad_precio.csv y .tex
+2026-11-25 17:14:52 | Tabla guardada: salidas/tabla8_sensibilidad_tc.csv y .tex
+2026-11-25 17:14:53 | Figura guardada: salidas/figura6_sensibilidad_precio_tc.png y .pdf
+2026-11-25 17:14:54 | Figura guardada: salidas/figura7_mapa_calor_van.png y .pdf
+2026-11-25 17:14:54 | Tabla guardada: salidas/tabla9_tornado.csv y .tex
+2026-11-25 17:14:54 | Figura guardada: salidas/figura8_tornado.png y .pdf
+2026-11-25 17:14:54 | Tabla guardada: salidas/tabla10_escenarios.csv y .tex
+2026-11-25 17:15:02 | Tabla guardada: salidas/tabla11_montecarlo.csv y .tex
+2026-11-25 17:15:02 | Figura guardada: salidas/figura9_montecarlo.png y .pdf
+2026-11-25 17:15:02 | Datos del dashboard guardados: dashboard/datos_dashboard.js
+2026-11-25 17:15:02 | VAN base = S/ 2,993,982 | TIR = 27.0% | B/C = 1.19 | PRI = 4.0 años
+2026-11-25 17:15:02 | Precio de equilibrio = US$ 5.18/kg | TC de equilibrio = S/ 3.051
+2026-11-25 17:15:02 | Monte Carlo: P(VAN<0) = 37.67%
+2026-11-25 17:15:02 | 04_analisis.py terminado: 11 tablas y 9 figuras en /salidas

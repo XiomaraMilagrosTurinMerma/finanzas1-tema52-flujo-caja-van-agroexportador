@@ -1,5 +1,5 @@
 {
-  "fecha_ejecucion": "2026-11-25 16:40:10",
+  "fecha_ejecucion": "2026-11-25 17:15:02",
   "precio_base_usd_kg": 6.3783,
   "tc_base": 3.7566,
   "van_base_soles": 2993982.26,
@@ -12,9 +12,9 @@
   "volatilidad_precio": 0.19,
   "volatilidad_tc": 0.0505,
   "correlacion": -0.2696,
-  "montecarlo_prob_van_negativo": 0.3725,
-  "montecarlo_van_p5": -5287262.64,
-  "montecarlo_van_p95": 14173743.21,
+  "montecarlo_prob_van_negativo": 0.3767,
+  "montecarlo_van_p5": -5365738.43,
+  "montecarlo_van_p95": 13812418.43,
   "parametros": {
     "hectareas": 10,
     "horizonte": 10,
